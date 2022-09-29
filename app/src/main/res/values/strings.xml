@@ -2,6 +2,7 @@
     <string name="app_name">UnaAyuditaAqui</string>
 
     <string name="title_active_login">UnaAyuditaAqui</string>
+    <string name="my_account">Mi cuenta</string>
     <string name="password">Contraseña</string>
     <string name="new_password">Nueva contraseña</string>
     <string name="current_password">Contraseña actual</string>
@@ -30,5 +31,10 @@
     <string name="title_delete_account">Eliminar cuenta</string>
     <string name="subtitle_delete_account">Por motivos de seguridad para eliminar tu cuenta por completo, debes de ingresar tu contraseña.</string>
     <string name="delete">Eliminar</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Inicio</string>
+    <string name="profile">Perfil</string>
+    <string name="open">Abrir</string>
+    <string name="close">Cerrar</string>
 
 </resources>
