@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.unaayuditaaqui.unaayuditaaqui.databinding.ActivitySignUpBinding
 import java.util.regex.Pattern
@@ -15,6 +16,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivitySignUpBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,9 +24,11 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
+        database = FirebaseDatabase.getInstance()
 
         binding.signUpButton.setOnClickListener {
-
+            val mfirstName = binding.firstnameEditText.text.toString()
+            val mlastName = binding.firstnameEditText.text.toString()
             val mEmail = binding.emailEditText.text.toString()
             val mPassword = binding.passwordEditText.text.toString()
             val mConfirmPassword = binding.confirmPasswordEditText.text.toString()
@@ -34,7 +38,13 @@ class SignUpActivity : AppCompatActivity() {
                     ".{6,}" +                // Al menos 4 caracteres
                     "$")
 
-            if(mEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(mEmail).matches()) {
+            if (mfirstName.isEmpty()){
+                Toast.makeText(this, "Campo obligatorio.",
+                    Toast.LENGTH_SHORT).show()
+            } else if (mlastName.isEmpty()){
+                Toast.makeText(this, "Campo obligatorio.",
+                    Toast.LENGTH_SHORT).show()
+            } else if (mEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(mEmail).matches()) {
                 Toast.makeText(this, "Ingrese un email valido.",
                     Toast.LENGTH_SHORT).show()
             } else if (mPassword.isEmpty() || !passwordRegex.matcher(mPassword).matches()){
@@ -44,7 +54,7 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "Confirma la contraseña.",
                     Toast.LENGTH_SHORT).show()
             } else {
-                createAccount(mEmail, mPassword)
+                createAccount(mEmail, mPassword, mfirstName, mlastName)
             }
 
         }
@@ -70,12 +80,26 @@ class SignUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun createAccount(email: String, password: String) {
+    private fun createAccount(
+        email: String,
+        password: String,
+        firstName: String,
+        lastName: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val intent = Intent(this, CheckEmailActivity::class.java)
-                    this.startActivity(intent)
+                    val databaseRef = database.reference.child("users").child(auth.currentUser!!.uid)
+                    val users : Users = Users(firstName,lastName,email,auth.currentUser!!.uid)
+                    databaseRef.setValue(users).addOnCompleteListener {
+                        if(it.isSuccessful){
+                            val intent = Intent(this, CheckEmailActivity::class.java)
+                            this.startActivity(intent)
+                        } else {
+                            Toast.makeText(this, "No se pudo guardar los datos",
+                                Toast.LENGTH_SHORT).show()
+                }
+                    }
+
                 } else {
                     Toast.makeText(this, "No se pudo crear la cuenta. Vuelva a intertarlo",
                         Toast.LENGTH_SHORT).show()
