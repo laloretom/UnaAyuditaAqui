@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
 import com.unaayuditaaqui.unaayuditaaqui.databinding.ActivitySignUpBinding
@@ -27,8 +28,8 @@ class SignUpActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance()
 
         binding.signUpButton.setOnClickListener {
-            val mfirstName = binding.firstnameEditText.text.toString()
-            val mlastName = binding.firstnameEditText.text.toString()
+            val muserName = binding.usernameEditText.text.toString()
+            val mname = binding.nameEditText.text.toString()
             val mEmail = binding.emailEditText.text.toString()
             val mPassword = binding.passwordEditText.text.toString()
             val mConfirmPassword = binding.confirmPasswordEditText.text.toString()
@@ -38,10 +39,10 @@ class SignUpActivity : AppCompatActivity() {
                     ".{6,}" +                // Al menos 4 caracteres
                     "$")
 
-            if (mfirstName.isEmpty()){
+            if (muserName.isEmpty()){
                 Toast.makeText(this, "Campo obligatorio.",
                     Toast.LENGTH_SHORT).show()
-            } else if (mlastName.isEmpty()){
+            } else if (mname.isEmpty()){
                 Toast.makeText(this, "Campo obligatorio.",
                     Toast.LENGTH_SHORT).show()
             } else if (mEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(mEmail).matches()) {
@@ -54,7 +55,7 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "Confirma la contraseña.",
                     Toast.LENGTH_SHORT).show()
             } else {
-                createAccount(mEmail, mPassword, mfirstName, mlastName)
+                createAccount(mEmail, mPassword, muserName, mname)
             }
 
         }
@@ -83,22 +84,38 @@ class SignUpActivity : AppCompatActivity() {
     private fun createAccount(
         email: String,
         password: String,
-        firstName: String,
-        lastName: String) {
+        userName: String,
+        name: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val databaseRef = database.reference.child("users").child(auth.currentUser!!.uid)
-                    val users : Users = Users(firstName,lastName,email,auth.currentUser!!.uid)
-                    databaseRef.setValue(users).addOnCompleteListener {
-                        if(it.isSuccessful){
-                            val intent = Intent(this, CheckEmailActivity::class.java)
-                            this.startActivity(intent)
-                        } else {
-                            Toast.makeText(this, "No se pudo guardar los datos",
-                                Toast.LENGTH_SHORT).show()
-                }
+                    val user = auth.currentUser
+
+                    val profileUpdates = userProfileChangeRequest {
+                        displayName = userName
                     }
+
+                    user!!.updateProfile(profileUpdates)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+
+                                val databaseRef = database.reference.child("Users").child(auth.currentUser!!.uid)
+                                val users : Users = Users(userName,name,email,auth.currentUser!!.uid)
+                                databaseRef.setValue(users).addOnCompleteListener {
+                                    if(it.isSuccessful){
+                                        val intent = Intent(this, CheckEmailActivity::class.java)
+                                        this.startActivity(intent)
+                                    } else {
+                                        Toast.makeText(this, "No se pudo guardar los datos",
+                                            Toast.LENGTH_SHORT).show()
+                                    }
+                                }
+
+                            } else {
+                                Toast.makeText(this, "No se pudo cambiar cambiar el Nombre de Usuario",
+                                    Toast.LENGTH_SHORT).show()
+                            }
+                        }
 
                 } else {
                     Toast.makeText(this, "No se pudo crear la cuenta. Vuelva a intertarlo",
