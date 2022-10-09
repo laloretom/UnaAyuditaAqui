@@ -2,7 +2,6 @@ package com.unaayuditaaqui.unaayuditaaqui
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -29,12 +28,32 @@ class MainActivity : AppCompatActivity() {
         updateUI ()
 
         binding.navHome.setOnClickListener{
-            Toast.makeText(this, "Home.",
-                Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, HomeActivity::class.java)
+            this.startActivity(intent)
         }
 
         binding.navAccount.setOnClickListener{
             val intent = Intent(this, MyAccountActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        binding.navSearch.setOnClickListener{
+            val intent = Intent(this, SearchActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        binding.navServices.setOnClickListener{
+            val intent = Intent(this, MyServicesActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        binding.navHistory.setOnClickListener{
+            val intent = Intent(this, HistoryActivity::class.java)
+            this.startActivity(intent)
+        }
+
+        binding.navMessages.setOnClickListener{
+            val intent = Intent(this, MessagesActivity::class.java)
             this.startActivity(intent)
         }
 

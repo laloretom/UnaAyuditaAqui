@@ -24,7 +24,7 @@
     <string name="change_password">Cambiar contraseña</string>
     <string name="forget_password">¿Olvidaste tu contraseña?</string>
     <string name="title_check_email">Verificacion de Email</string>
-    <string name="subtitle_check_email">Para completar su registro. ¡Por favor! verifica su correo y después de clic en continuar.</string>
+    <string name="subtitle_check_email">¡Por favor! verifica su correo y después de clic en continuar.</string>
     <string name="continue_check_email">Continuar</string>
     <string name="title_account_recovery">Recuperación de la cuenta</string>
     <string name="subtitle_account_recovery">Ingresa tu email para que se te pueda enviar un correo con los pasos para cambiar tu contraseña.</string>
@@ -39,8 +39,9 @@
     <string name="open">Abrir</string>
     <string name="close">Cerrar</string>
     <string name="search">Buscar</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="history">Historial</string>
+    <string name="messages">Mensajes</string>
     <string name="my_services">Mis servicios</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
