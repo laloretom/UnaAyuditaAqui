@@ -44,13 +44,46 @@ class AccountFragment : Fragment() {
 
         updateUI ()
 
+        binding.editInfoImage.setOnClickListener{
+            val intent = Intent(activity, EditProfileActivity::class.java)
+            this.startActivity(intent)
+        }
+
         binding.rootRemoveAds.setOnClickListener{
             Toast.makeText(activity,"Eliminar ADS", Toast.LENGTH_SHORT).show()
         }
 
         binding.rootHomePage.setOnClickListener {
-            val intent = Intent(activity, AccountFragment::class.java)
+            val intent = Intent(activity, MyAccountActivity::class.java)
             this.startActivity(intent)
+        }
+
+        binding.rootMessages.setOnClickListener {
+            Toast.makeText(activity,"Mis mensajes", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.rootRegion.setOnClickListener {
+            Toast.makeText(activity,"Cambiar región", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.rootSetting.setOnClickListener {
+            Toast.makeText(activity,"Configuración", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.rootShare.setOnClickListener {
+            Toast.makeText(activity,"Compartir", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.rootHelp.setOnClickListener {
+            Toast.makeText(activity,"Ayuda", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.rootAbout.setOnClickListener {
+            Toast.makeText(activity,"Acerca de", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.rootLogOut.setOnClickListener {
+            signOut();
         }
 
         //  Inflar el diseño de este fragmento
@@ -80,6 +113,12 @@ class AccountFragment : Fragment() {
                 .placeholder(R.drawable.ic_profile)
                 .into(binding.headerImage)
         }
+    }
+
+    private  fun signOut(){
+        Firebase.auth.signOut()
+        val intent = Intent(activity, SignInActivity::class.java)
+        this.startActivity(intent)
     }
 
 

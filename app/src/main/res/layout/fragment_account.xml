@@ -139,7 +139,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/root07"
+                android:id="@+id/root_messages"
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/recycler_view_item_bg">
@@ -165,7 +165,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/root01"
+                android:id="@+id/root_region"
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
@@ -218,7 +218,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/root02"
+                android:id="@+id/root_setting"
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/recycler_view_item_bg">
@@ -262,7 +262,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/root03"
+                android:id="@+id/root_help"
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
@@ -289,7 +289,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/root04"
+                android:id="@+id/root_about"
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/recycler_view_item_bg">
@@ -315,7 +315,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/root06"
+                android:id="@+id/root_log_out"
                 android:layout_width="fill_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="8dp"
