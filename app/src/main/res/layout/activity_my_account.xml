@@ -8,19 +8,6 @@
     android:background="#dde3e7"
     tools:context=".MyAccountActivity">
 
-    <ImageView
-        android:id="@+id/backImageView"
-        android:layout_width="39dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/all"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back"
-        tools:ignore="VectorDrawableCompat" />
-
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
@@ -30,10 +17,10 @@
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         app:cardCornerRadius="20dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backImageView">
+        app:layout_constraintStart_toStartOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"

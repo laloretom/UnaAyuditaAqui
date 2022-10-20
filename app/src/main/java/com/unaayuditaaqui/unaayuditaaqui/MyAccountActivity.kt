@@ -1,6 +1,5 @@
 package com.unaayuditaaqui.unaayuditaaqui
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -28,10 +27,6 @@ class MyAccountActivity : AppCompatActivity() {
 
         updateUI ()
 
-        binding.backImageView.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            this.startActivity(intent)
-        }
 
         binding.updateProfileAppCompatButton.setOnClickListener {
             val name = binding.nameEditText.text.toString()
