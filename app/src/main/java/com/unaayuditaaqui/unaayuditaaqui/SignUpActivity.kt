@@ -29,7 +29,8 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.signUpButton.setOnClickListener {
             val muserName = binding.usernameEditText.text.toString()
-            val mname = binding.nameEditText.text.toString()
+            val mfirstName = binding.nameEditText.text.toString()
+            val mlastName = binding.lastnameEditText.text.toString()
             val mEmail = binding.emailEditText.text.toString()
             val mPassword = binding.passwordEditText.text.toString()
             val mConfirmPassword = binding.confirmPasswordEditText.text.toString()
@@ -42,10 +43,13 @@ class SignUpActivity : AppCompatActivity() {
             if (muserName.isEmpty()){
                 Toast.makeText(this, "Campo obligatorio.",
                     Toast.LENGTH_SHORT).show()
-            } else if (mname.isEmpty()){
+            } else if (mfirstName.isEmpty()){
                 Toast.makeText(this, "Campo obligatorio.",
                     Toast.LENGTH_SHORT).show()
-            } else if (mEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(mEmail).matches()) {
+            }else if (mlastName.isEmpty()){
+                Toast.makeText(this, "Campo obligatorio.",
+                    Toast.LENGTH_SHORT).show()
+            }else if (mEmail.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(mEmail).matches()) {
                 Toast.makeText(this, "Ingrese un email valido.",
                     Toast.LENGTH_SHORT).show()
             } else if (mPassword.isEmpty() || !passwordRegex.matcher(mPassword).matches()){
@@ -55,7 +59,7 @@ class SignUpActivity : AppCompatActivity() {
                 Toast.makeText(this, "Confirma la contraseña.",
                     Toast.LENGTH_SHORT).show()
             } else {
-                createAccount(mEmail, mPassword, muserName, mname)
+                createAccount(mEmail, mPassword, muserName, mfirstName, mlastName)
             }
 
         }
@@ -85,7 +89,8 @@ class SignUpActivity : AppCompatActivity() {
         email: String,
         password: String,
         userName: String,
-        name: String) {
+        firstName: String,
+        lastName: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -100,7 +105,7 @@ class SignUpActivity : AppCompatActivity() {
                             if (task.isSuccessful) {
 
                                 val databaseRef = database.reference.child("Users").child(auth.currentUser!!.uid)
-                                val users : Users = Users(userName,name,email,auth.currentUser!!.uid)
+                                val users : Users = Users(auth.currentUser!!.uid,userName,firstName,lastName,email,)
                                 databaseRef.setValue(users).addOnCompleteListener {
                                     if(it.isSuccessful){
                                         val intent = Intent(this, CheckEmailActivity::class.java)

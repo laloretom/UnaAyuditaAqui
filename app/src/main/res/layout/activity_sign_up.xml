@@ -1,54 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".SignUpActivity">
 
-    <ImageView
-        android:id="@+id/backImageView"
-        android:layout_width="39dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/all"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back"
-        tools:ignore="VectorDrawableCompat" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
+    <RelativeLayout
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backImageView"
-        tools:ignore="UseCompoundDrawables">
+        android:layout_height="48dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/recycler_view_item_bg">
 
         <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:contentDescription="@string/all"
-            app:srcCompat="@drawable/logo"
-            tools:ignore="VectorDrawableCompat" />
+            android:id="@+id/backImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_back" />
 
         <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/title_active_login"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical"
+            android:text="@string/signup"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -60,7 +48,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+        app:layout_constraintTop_toBottomOf="@+id/topBar">
 
         <EditText
             android:id="@+id/usernameEditText"
@@ -69,7 +57,7 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
-            android:autofillHints="@string/first_name"
+            android:autofillHints="@string/user_name"
             android:background="@drawable/ic_field"
             android:drawableStart="@drawable/ic_user"
             android:drawablePadding="16dp"
@@ -85,12 +73,28 @@
             android:layout_marginLeft="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginRight="24dp"
+            android:autofillHints="@string/first_name"
+            android:background="@drawable/ic_field"
+            android:drawableStart="@drawable/ic_user"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="@string/first_name"
+            android:inputType="textPersonName"
+            android:padding="16dp" />
+
+        <EditText
+            android:id="@+id/lastnameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginRight="24dp"
             android:autofillHints="@string/last_name"
             android:background="@drawable/ic_field"
             android:drawableStart="@drawable/ic_user"
             android:drawablePadding="16dp"
             android:ems="10"
-            android:hint="@string/name"
+            android:hint="@string/last_name"
             android:inputType="textPersonName"
             android:padding="16dp" />
 
@@ -156,4 +160,4 @@
             android:textColor="@color/white" />
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
