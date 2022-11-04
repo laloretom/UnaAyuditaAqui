@@ -49,5 +49,13 @@
     <string name="share">Compartir</string>
     <string name="help">Ayuda</string>
     <string name="about">Acerca de</string>
+    <string name="edit_account">Editar cuenta</string>
+    <string name="date_form">Fecha</string>
+    <string name="date">01/01/2022</string>
+    <string name="description">Descripción</string>
+    <string name="save">Guardar</string>
+    <string name="category">Categoria</string>
+    <string name="title">Titulo</string>
+
 
 </resources>

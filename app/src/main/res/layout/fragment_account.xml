@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="@color/gray"
     tools:context=".AccountFragment">
 
     <ScrollView
@@ -16,7 +17,6 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="#dde3e7"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -88,13 +88,13 @@
             <RelativeLayout
                 android:id="@+id/root_remove_ads"
                 android:layout_width="fill_parent"
-                android:layout_height="48.0dip"
+                android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/recycler_view_item_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
@@ -105,7 +105,7 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="16dp"
@@ -114,13 +114,13 @@
 
             <RelativeLayout
                 android:id="@+id/root_home_page"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/recycler_view_item_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
@@ -131,7 +131,7 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="16dp"
@@ -140,13 +140,13 @@
 
             <RelativeLayout
                 android:id="@+id/root_messages"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/recycler_view_item_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
@@ -157,7 +157,7 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="16dp"
@@ -166,14 +166,14 @@
 
             <RelativeLayout
                 android:id="@+id/root_region"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/recycler_view_item_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
@@ -184,7 +184,7 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="16dp"
@@ -193,13 +193,13 @@
 
             <RelativeLayout
                 android:id="@+id/root_night_mode"
-                android:layout_width="fill_parent"
-                android:layout_height="48.0dip"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
                 android:background="@drawable/recycler_view_item_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
@@ -219,13 +219,13 @@
 
             <RelativeLayout
                 android:id="@+id/root_setting"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/recycler_view_item_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
@@ -236,7 +236,7 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="16dp"
@@ -245,13 +245,13 @@
 
             <RelativeLayout
                 android:id="@+id/root_share"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="48.0dip"
                 android:background="@drawable/recycler_view_item_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
@@ -263,14 +263,14 @@
 
             <RelativeLayout
                 android:id="@+id/root_help"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/recycler_view_item_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
@@ -281,7 +281,7 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="16dp"
@@ -290,13 +290,13 @@
 
             <RelativeLayout
                 android:id="@+id/root_about"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/recycler_view_item_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
@@ -316,14 +316,14 @@
 
             <RelativeLayout
                 android:id="@+id/root_log_out"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/recycler_view_item_bg">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
+                    android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
                     android:gravity="center_vertical"
@@ -334,7 +334,7 @@
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="16dp"

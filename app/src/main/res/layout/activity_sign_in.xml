@@ -128,7 +128,7 @@
             android:layout_weight="0"
             android:text="@string/link_signup"
             android:textColor="@color/colorPrimary"
-            android:textSize="24sp" />
+            android:textSize="20sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

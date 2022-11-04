@@ -16,9 +16,6 @@ class SignInActivity : ComponentActivity() {
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Thread.sleep(2000)
-        setTheme(R.style.Theme_UnaAyuditaAqui)
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_in)
 
@@ -59,12 +56,14 @@ class SignInActivity : ComponentActivity() {
 
     }
 
+
     public override fun onStart() {
         super.onStart()
         val currentUser = auth.currentUser
         if(currentUser != null){
             if(currentUser.isEmailVerified){
-                reload()
+                finish()
+                this.onDestroy()
             } else {
                 val intent = Intent(this, CheckEmailActivity::class.java)
                 this.startActivity(intent)
@@ -77,10 +76,11 @@ class SignInActivity : ComponentActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     Log.d("TAG", "signInWithEmail:success")
-                    reload()
+                    finish()
+                    this.onDestroy()
                 } else {
                     Log.w("TAG", "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Email o contraseña o incorrectos.",
+                    Toast.makeText(baseContext, "Email o contraseña incorrectos.",
                         Toast.LENGTH_SHORT).show()
                 }
             }
@@ -89,5 +89,6 @@ class SignInActivity : ComponentActivity() {
     private fun reload() {
         val intent = Intent(this, MainActivity::class.java)
         this.startActivity(intent)
+
     }
 }

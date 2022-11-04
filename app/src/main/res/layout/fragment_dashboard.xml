@@ -31,7 +31,7 @@
                 android:rowCount="4">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/nav_home"
+                    android:id="@+id/nav_services"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_row="0"
@@ -52,14 +52,15 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_home"
+                            android:src="@drawable/ic_services"
                             android:layout_marginTop="40dp"/>
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
-                            android:text="@string/home"
+                            android:textAlignment="center"
+                            android:text="@string/my_services"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -69,7 +70,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/nav_account"
+                    android:id="@+id/add_service"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_row="0"
@@ -90,14 +91,16 @@
                             android:layout_width="80dp"
                             android:layout_height="80dp"
                             android:layout_gravity="center"
-                            android:src="@drawable/ic_home"
+                            android:src="@drawable/ic_add"
                             android:layout_marginTop="40dp"/>
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
-                            android:text="@string/home"
+                            android:textAlignment="center"
+                            android:text="Agregar un
+                             servicio"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"
                             android:textStyle="bold"
@@ -132,9 +135,10 @@
                             android:layout_marginTop="40dp"/>
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
+                            android:textAlignment="center"
                             android:text="@string/home"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"
@@ -145,7 +149,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/nav_services"
+                    android:id="@+id/nav_services1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_row="1"
@@ -170,9 +174,10 @@
                             android:layout_marginTop="40dp"/>
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
+                            android:textAlignment="center"
                             android:text="@string/home"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"
@@ -208,9 +213,10 @@
                             android:layout_marginTop="40dp"/>
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
+                            android:textAlignment="center"
                             android:text="@string/home"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"
@@ -246,9 +252,10 @@
                             android:layout_marginTop="40dp"/>
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
+                            android:textAlignment="center"
                             android:text="@string/home"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"
@@ -284,9 +291,10 @@
                             android:layout_marginTop="40dp"/>
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
+                            android:textAlignment="center"
                             android:text="@string/home"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"
@@ -322,9 +330,10 @@
                             android:layout_marginTop="40dp"/>
 
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center_horizontal"
+                            android:textAlignment="center"
                             android:text="@string/home"
                             android:textColor="@color/colorPrimary"
                             android:textSize="18sp"

@@ -1,6 +1,6 @@
 package com.unaayuditaaqui.unaayuditaaqui
 
-data class Users (
+data class User (
     var uid : String? = null,
     var userName : String? = null,
     var firstName : String? = null,

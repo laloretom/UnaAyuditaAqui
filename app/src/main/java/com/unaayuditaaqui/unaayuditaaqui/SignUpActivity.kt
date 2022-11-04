@@ -29,8 +29,8 @@ class SignUpActivity : AppCompatActivity() {
 
         binding.signUpButton.setOnClickListener {
             val muserName = binding.usernameEditText.text.toString()
-            val mfirstName = binding.nameEditText.text.toString()
-            val mlastName = binding.lastnameEditText.text.toString()
+            val mfirstName = binding.firstNameEditText.text.toString()
+            val mlastName = binding.lastNameEditText.text.toString()
             val mEmail = binding.emailEditText.text.toString()
             val mPassword = binding.passwordEditText.text.toString()
             val mConfirmPassword = binding.confirmPasswordEditText.text.toString()
@@ -105,8 +105,8 @@ class SignUpActivity : AppCompatActivity() {
                             if (task.isSuccessful) {
 
                                 val databaseRef = database.reference.child("Users").child(auth.currentUser!!.uid)
-                                val users : Users = Users(auth.currentUser!!.uid,userName,firstName,lastName,email,)
-                                databaseRef.setValue(users).addOnCompleteListener {
+                                val user : User = User(auth.currentUser!!.uid,userName,firstName,lastName,email)
+                                databaseRef.setValue(user).addOnCompleteListener {
                                     if(it.isSuccessful){
                                         val intent = Intent(this, CheckEmailActivity::class.java)
                                         this.startActivity(intent)

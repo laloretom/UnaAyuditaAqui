@@ -67,7 +67,7 @@
             android:padding="16dp" />
 
         <EditText
-            android:id="@+id/nameEditText"
+            android:id="@+id/firstNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
@@ -83,7 +83,7 @@
             android:padding="16dp" />
 
         <EditText
-            android:id="@+id/lastnameEditText"
+            android:id="@+id/lastNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="24dp"
