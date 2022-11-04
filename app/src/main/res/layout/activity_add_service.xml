@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".AddServiceActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="16dp"
+                        app:cardCornerRadius="16dp">
+
+                        <ImageView
+                            android:id="@+id/posterImageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="16dp"
+                            android:contentDescription="@string/all"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/ic_profile" />
+                    </androidx.cardview.widget.CardView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="20dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/titleTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginRight="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="@string/title"
+                                android:textColor="@color/black_500" />
+
+                            <EditText
+                                android:id="@+id/titleEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:layout_below="@+id/titleTextView"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginRight="16dp"
+                                android:autofillHints="@string/title"
+                                android:background="@drawable/ic_field"
+                                android:ems="80"
+                                android:hint="@string/title"
+                                android:inputType="textAutoComplete"
+                                android:paddingLeft="16dp"
+                                android:paddingTop="8dp"
+                                android:paddingRight="16dp"
+                                android:paddingBottom="8dp"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/dateTextView"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/titleEditText"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:text="@string/date_form"
+                                android:textColor="@color/black_500" />
+
+                            <EditText
+                                android:id="@+id/dateEditText"
+                                android:layout_width="120dp"
+                                android:layout_height="48dp"
+                                android:layout_below="@+id/dateTextView"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="16dp"
+                                android:autofillHints="@string/date"
+                                android:background="@drawable/ic_field"
+                                android:ems="3"
+                                android:hint="@string/date"
+                                android:inputType="date|text"
+                                android:paddingLeft="16dp"
+                                android:paddingTop="8dp"
+                                android:paddingRight="16dp"
+                                android:paddingBottom="8dp"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/categoryTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/titleEditText"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginBottom="8dp"
+                                android:layout_toEndOf="@+id/dateEditText"
+                                android:text="@string/category"
+                                android:textColor="@color/black_500" />
+
+                            <EditText
+                                android:id="@+id/categoryEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:layout_below="@+id/dateTextView"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_toEndOf="@+id/dateTextView"
+                                android:autofillHints=""
+                                android:background="@drawable/ic_field"
+                                android:ems="10"
+                                android:hint="@string/category"
+                                android:inputType="textUri|text|datetime"
+                                android:paddingLeft="16dp"
+                                android:paddingTop="8dp"
+                                android:paddingRight="16dp"
+                                android:paddingBottom="8dp"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:id="@+id/descriptionTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/categoryEditText"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginRight="16dp"
+                                android:text="@string/description"
+                                android:textColor="@color/black_500" />
+
+                            <EditText
+                                android:id="@+id/descriptionEditText"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                android:layout_below="@+id/descriptionTextView"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginLeft="16dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="16dp"
+                                android:layout_marginRight="16dp"
+                                android:autofillHints="@string/description"
+                                android:background="@drawable/ic_field"
+                                android:ems="255"
+                                android:gravity="clip_vertical"
+                                android:hint="@string/description"
+                                android:inputType="textMultiLine"
+                                android:lines="6"
+                                android:maxLines="12"
+                                android:minLines="6"
+                                android:paddingLeft="36dp"
+                                android:paddingTop="8dp"
+                                android:paddingRight="16dp"
+                                android:paddingBottom="8dp"
+                                android:textSize="16sp" />
+
+                            <androidx.appcompat.widget.AppCompatButton
+                                android:id="@+id/saveButton"
+                                android:layout_width="160dp"
+                                android:layout_height="48dp"
+                                android:layout_below="@+id/descriptionEditText"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="16dp"
+                                android:background="@drawable/ic_buttom"
+                                android:gravity="center"
+                                android:text="@string/save"
+                                android:textColor="@color/white" />
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
