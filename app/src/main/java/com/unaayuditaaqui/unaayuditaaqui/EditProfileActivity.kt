@@ -21,7 +21,6 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditProfileBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
-    private lateinit var selectedImg: Uri
     private val fileResult = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +33,32 @@ class EditProfileActivity : AppCompatActivity() {
 
         binding.updateProfileAppCompatButton.setOnClickListener {
             val username = binding.usernameEditText.text.toString()
-            updateProfile(username)
+            val firstName = binding.firstNameEditText.text.toString()
+            val lastName = binding.lastNameEditText.text.toString()
+
+            if (firstName.isNotEmpty()){
+                database.reference.child("Users").child(auth.currentUser!!.uid).child("firstName").setValue(firstName)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Se el nombre se actualizo correctamente.",
+                                Toast.LENGTH_SHORT).show()
+                            updateUI()
+                        }
+                    }
+            }
+            if (lastName.isNotEmpty()){
+                database.reference.child("Users").child(auth.currentUser!!.uid).child("lastName").setValue(lastName)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Se el apellido se actualizo correctamente.",
+                                Toast.LENGTH_SHORT).show()
+                            updateUI()
+                        }
+                    }
+            }
+            if (username.isNotEmpty()){
+                updateProfile(username)
+            }
         }
 
         binding.userImage.setOnClickListener {
@@ -118,18 +142,12 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
 
-
-
     private  fun updateUI () {
         val user = auth.currentUser
 
         if (user != null){
             binding.emailTextView.text = user.email
-
-            if(user.displayName != null){
-                binding.userName.text = user.displayName
-                binding.usernameEditText.setText(user.displayName)
-            }
+            binding.userName.text = user.displayName
 
             Glide
                 .with(this)
