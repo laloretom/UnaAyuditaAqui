@@ -3,6 +3,8 @@ package com.unaayuditaaqui.unaayuditaaqui
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -22,11 +24,20 @@ class AddServiceActivity : AppCompatActivity() {
     private val file = 1
     private var fileUri: Uri? = null
 
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddServiceBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val typeService = resources.getStringArray(R.array.type_service)
+        val adapterTypeService = ArrayAdapter(this,R.layout.list_item_type,typeService)
+
+        with(binding.autoCompleteTextView){
+            setAdapter(adapterTypeService)
+        }
+
 
         binding.saveButton.setOnClickListener{
             val dateTime = LocalDateTime.now()
@@ -40,35 +51,40 @@ class AddServiceActivity : AppCompatActivity() {
             val idService: String = key
             val folder: StorageReference = FirebaseStorage.getInstance().reference.child("Services")
             val servicesReference : StorageReference = folder.child("img$key")
+            val typeS : String = binding.autoCompleteTextView.text.toString()
 
+            if (typeS != ""){
+                if(fileUri==null){
+                    val mService = Service(uidAuthor, serviceTitle,typeS, description, category,date," ",idService)
+                    val postValues =mService.toMap()
 
-            if(fileUri==null){
-                val mService = Service(uidAuthor, serviceTitle, description, category,date," ",idService)
-                val postValues =mService.toMap()
+                    val childUpdates = hashMapOf<String, Any>(
+                        "/Services/$key" to postValues,
+                        "/Users/$uidAuthor/Services/$key" to postValues
+                    )
+                    database.reference.updateChildren(childUpdates)
+                    //myRef.child(key).setValue(mService)
+                } else {
+                    servicesReference.putFile(fileUri!!).addOnSuccessListener {
+                        servicesReference.downloadUrl.addOnSuccessListener { uri ->
+                            val mService = Service(uidAuthor, serviceTitle,typeS, description, category,date, uri.toString(), idService)
+                            val postValues =mService.toMap()
 
-                val childUpdates = hashMapOf<String, Any>(
-                    "/Services/$key" to postValues,
-                    "/Users/$uidAuthor/Services/$key" to postValues
-                )
-                database.reference.updateChildren(childUpdates)
-                //myRef.child(key).setValue(mService)
-            } else {
-                servicesReference.putFile(fileUri!!).addOnSuccessListener {
-                    servicesReference.downloadUrl.addOnSuccessListener { uri ->
-                        val mService = Service(uidAuthor, serviceTitle, description, category,date, uri.toString(), idService)
-                        val postValues =mService.toMap()
-
-                        val childUpdates = hashMapOf<String, Any>(
-                            "/Services/$key" to postValues,
-                            "/Users/$uidAuthor/Services/$key" to postValues
-                        )
-                        database.reference.updateChildren(childUpdates)
-                        //myRef.child(key).setValue(mService)
+                            val childUpdates = hashMapOf<String, Any>(
+                                "/Services/$key" to postValues,
+                                "/Users/$uidAuthor/Services/$key" to postValues
+                            )
+                            database.reference.updateChildren(childUpdates)
+                            //myRef.child(key).setValue(mService)
+                        }
                     }
                 }
-            }
 
-            finish()
+                finish()
+
+            }else{
+                Toast.makeText(this, "Selecione el tipo", Toast.LENGTH_SHORT).show()
+            }
 
         }
 
@@ -85,5 +101,6 @@ class AddServiceActivity : AppCompatActivity() {
         fileUri = uri
         binding.posterImageView.setImageURI(uri)
     }
+
 
 }

@@ -42,10 +42,6 @@ class MyServicesActivity : AppCompatActivity() {
         serviceArrayList = arrayListOf<Service>()
         getServiceData()
 
-        if (serviceSize < 4){
-            binding.addImageView.visibility = View.VISIBLE
-        }
-
         binding.addImageView.setOnClickListener { v ->
             val intent = Intent(this, AddServiceActivity::class.java)
             v.context.startActivity(intent)
@@ -72,6 +68,13 @@ class MyServicesActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (serviceSize <= 3){
+            binding.addImageView.visibility = View.VISIBLE
+        }
     }
 
     private fun fullScreen() {

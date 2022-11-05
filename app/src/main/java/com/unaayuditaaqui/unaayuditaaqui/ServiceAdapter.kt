@@ -34,8 +34,8 @@ class ServiceAdapter(private val serviceList: ArrayList<Service>) : RecyclerView
 
         holder.itemView.setOnClickListener { v ->
             val intent = Intent(v.context, DetailServiceActivity::class.java).apply {
-                //putExtra("key", currentItem.idService)
-                putExtra("key", "currentItem.url")
+                putExtra("key", currentItem.idService)
+                //putExtra("key", "currentItem.url")
 
             }
             v.context.startActivity(intent)
