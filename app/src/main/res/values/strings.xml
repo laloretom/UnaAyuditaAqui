@@ -56,6 +56,9 @@
     <string name="save">Guardar</string>
     <string name="category">Categoria</string>
     <string name="title">Titulo</string>
-
+    <string-array name="type_service">
+        <item>Brindar</item>
+        <item>Solicitar</item>
+    </string-array>
 
 </resources>
