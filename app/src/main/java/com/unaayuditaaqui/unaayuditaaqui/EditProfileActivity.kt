@@ -29,10 +29,11 @@ class EditProfileActivity : AppCompatActivity() {
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         auth = Firebase.auth
+
         database = FirebaseDatabase.getInstance()
 
-        binding.updateProfileAppCompatButton.setOnClickListener {
-            val username = binding.usernameEditText.text.toString()
+        binding.saveButton.setOnClickListener {
+            val username = binding.userNameEditText.text.toString()
             val firstName = binding.firstNameEditText.text.toString()
             val lastName = binding.lastNameEditText.text.toString()
 
@@ -42,7 +43,7 @@ class EditProfileActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Se el nombre se actualizo correctamente.",
                                 Toast.LENGTH_SHORT).show()
-                            updateUI()
+                            finish()
                         }
                     }
             }
@@ -52,7 +53,7 @@ class EditProfileActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Se el apellido se actualizo correctamente.",
                                 Toast.LENGTH_SHORT).show()
-                            updateUI()
+                            finish()
                         }
                     }
             }
@@ -61,10 +62,11 @@ class EditProfileActivity : AppCompatActivity() {
             }
         }
 
-        binding.userImage.setOnClickListener {
+        binding.userImageView.setOnClickListener {
             fileManager()
         }
 
+        /*
         binding.deleteAccountTextView.setOnClickListener {
             Toast.makeText(this,"Eliminar cuenta", Toast.LENGTH_SHORT).show()
         }
@@ -72,6 +74,8 @@ class EditProfileActivity : AppCompatActivity() {
         binding.updatePasswordTextView.setOnClickListener {
             Toast.makeText(this,"Actualizar contraseña", Toast.LENGTH_SHORT).show()
         }
+
+         */
 
         updateUI ()
     }
@@ -90,7 +94,7 @@ class EditProfileActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Toast.makeText(this, "Se realizaron los cambios correctamente.",
                         Toast.LENGTH_SHORT).show()
-                    updateUI()
+                    finish()
                 }
             }
     }
@@ -144,17 +148,13 @@ class EditProfileActivity : AppCompatActivity() {
 
     private  fun updateUI () {
         val user = auth.currentUser
-
         if (user != null){
-            binding.emailTextView.text = user.email
-            binding.userName.text = user.displayName
-
             Glide
                 .with(this)
                 .load(user.photoUrl)
                 .centerCrop()
                 .placeholder(R.drawable.ic_profile)
-                .into(binding.userImage)
+                .into(binding.userImageView)
         }
 
     }
