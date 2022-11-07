@@ -6,15 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 
 class MyServiceAdapter(private val serviceList: ArrayList<Service>) : RecyclerView.Adapter<MyServiceAdapter.ViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.service_content,
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.my_service_content,
         parent, false)
         return ViewHolder(itemView)
 
@@ -49,6 +53,33 @@ class MyServiceAdapter(private val serviceList: ArrayList<Service>) : RecyclerVi
             true
         }
 
+        holder.delete.setOnClickListener{v ->
+            MaterialAlertDialogBuilder(v.context)
+                .setTitle("¿Realmente quieres borrar?")
+                .setPositiveButton("Sí, eliminar") { dialogInterface, i ->
+                    val uidAuthor = currentItem.uidAuthor
+                    val id = currentItem.idService
+                    val dbService = FirebaseDatabase.getInstance().reference.child("Services")
+                    val dbServiceAutor = FirebaseDatabase.getInstance().getReference("Users/$uidAuthor/Services")
+
+                    v.context?.let {
+                        val imageFirebaseStorage = FirebaseStorage.getInstance().reference.child("Services/img$id")
+
+                        imageFirebaseStorage.delete().addOnCompleteListener {   resultado ->
+                            if(resultado.isSuccessful){
+                                dbService.child("$id").removeValue()
+                                dbServiceAutor.child("$id").removeValue()
+                            }else{
+                                Toast.makeText(v.context, "No se pudo borrar la publicación", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                }
+                .setNegativeButton("Cancelar", null)
+                .show()
+
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -61,8 +92,9 @@ class MyServiceAdapter(private val serviceList: ArrayList<Service>) : RecyclerVi
         val category: TextView = itemView.findViewById(R.id.categoryTextView)
         val date: TextView = itemView.findViewById(R.id.dateTextView)
         val image: ImageView = itemView.findViewById(R.id.imageServiceCardView)
-
+        val delete: ImageView = itemView.findViewById(R.id.deleteService)
     }
+
 
 
 

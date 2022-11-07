@@ -43,6 +43,7 @@ class AddServiceActivity : AppCompatActivity() {
             val dateTime = LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
             val uidAuthor = Firebase.auth.currentUser!!.uid
+            val nameAuthor = Firebase.auth.currentUser!!.displayName
             val serviceTitle : String = binding.titleEditText.text.toString()
             val date : String = dateTime.toString()
             val category : String = binding.categoryEditText.text.toString()
@@ -55,7 +56,7 @@ class AddServiceActivity : AppCompatActivity() {
 
             if (typeS != ""){
                 if(fileUri==null){
-                    val mService = Service(uidAuthor, serviceTitle,typeS, description, category,date," ",idService)
+                    val mService = Service(uidAuthor, nameAuthor,serviceTitle,typeS, description, category,date," ",idService)
                     val postValues =mService.toMap()
 
                     val childUpdates = hashMapOf<String, Any>(
@@ -67,7 +68,7 @@ class AddServiceActivity : AppCompatActivity() {
                 } else {
                     servicesReference.putFile(fileUri!!).addOnSuccessListener {
                         servicesReference.downloadUrl.addOnSuccessListener { uri ->
-                            val mService = Service(uidAuthor, serviceTitle,typeS, description, category,date, uri.toString(), idService)
+                            val mService = Service(uidAuthor, nameAuthor, serviceTitle,typeS, description, category,date, uri.toString(), idService)
                             val postValues =mService.toMap()
 
                             val childUpdates = hashMapOf<String, Any>(

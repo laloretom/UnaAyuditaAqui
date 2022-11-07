@@ -43,8 +43,9 @@ class MyServicesActivity : AppCompatActivity() {
         getServiceData()
 
         binding.addImageView.setOnClickListener { v ->
-            val intent = Intent(this, AddServiceActivity::class.java)
+            val intent = Intent(v.context, AddServiceActivity::class.java)
             v.context.startActivity(intent)
+            serviceArrayList.clear()
         }
 
     }
@@ -57,7 +58,6 @@ class MyServicesActivity : AppCompatActivity() {
                     for (serviceSnapshot in snapshot.children){
                         val service = serviceSnapshot.getValue(Service::class.java)
                         serviceArrayList.add(service!!)
-                        serviceSize++
                     }
                     serviceRecyclerView.adapter = MyServiceAdapter(serviceArrayList)
                 }

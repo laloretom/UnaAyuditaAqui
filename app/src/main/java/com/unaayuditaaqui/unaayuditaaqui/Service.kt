@@ -6,6 +6,7 @@ import com.google.firebase.database.IgnoreExtraProperties
 @IgnoreExtraProperties
 data class Service (
     var uidAuthor: String? = null,
+    var nameAuthor: String? = null,
     var serviceTitle: String? = null,
     var type: String? = null,
     var description: String? = null,
@@ -20,6 +21,7 @@ data class Service (
     fun toMap(): Map<String, Any?> {
         return mapOf(
             "uidAuthor" to uidAuthor,
+            "nameAuthor" to nameAuthor,
             "serviceTitle" to serviceTitle,
             "type" to type,
             "description" to description,

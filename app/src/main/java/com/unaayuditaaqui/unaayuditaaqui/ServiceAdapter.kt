@@ -40,7 +40,6 @@ class ServiceAdapter(private val serviceList: ArrayList<Service>) : RecyclerView
             }
             v.context.startActivity(intent)
         }
-
     }
 
     override fun getItemCount(): Int {

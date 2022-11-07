@@ -75,6 +75,7 @@ class EditServiceActivity : AppCompatActivity() {
             val date = LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
             val uidAuthor = Firebase.auth.currentUser!!.uid
+            val nameAuthor = Firebase.auth.currentUser!!.displayName
             val serviceTitle : String = binding.titleEditText.text.toString()
             val category : String = binding.categoryEditText.text.toString()
             val description: String = binding.descriptionEditText.text.toString()
@@ -86,7 +87,7 @@ class EditServiceActivity : AppCompatActivity() {
                 val serviceReference : StorageReference = folder.child("img$key")
 
                 if(fileUri == null){
-                    val mService = Service(uidAuthor, serviceTitle, typeS, description, category, date, imageUrl, idService)
+                    val mService = Service(uidAuthor, nameAuthor, serviceTitle, typeS, description, category, date, imageUrl, idService)
                     val postValues =mService.toMap()
                     val childUpdates = hashMapOf<String, Any>(
                         "/Services/$key" to postValues,
@@ -97,7 +98,7 @@ class EditServiceActivity : AppCompatActivity() {
                 } else {
                     serviceReference.putFile(fileUri!!).addOnSuccessListener {
                         serviceReference.downloadUrl.addOnSuccessListener { uri ->
-                            val mService = Service(uidAuthor, serviceTitle, typeS, description, category, date, uri.toString(), idService)
+                            val mService = Service(uidAuthor, nameAuthor, serviceTitle, typeS, description, category, date, uri.toString(), idService)
                             val postValues =mService.toMap()
                             val childUpdates = hashMapOf<String, Any>(
                                 "/Services/$key" to postValues,

@@ -3,6 +3,7 @@ package com.unaayuditaaqui.unaayuditaaqui
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.database.DataSnapshot
@@ -16,6 +17,7 @@ class DetailServiceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailServiceBinding
     private var imageUrl: String? = null
     private var fileUri: Uri? = null
+    private var userUid: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +38,10 @@ class DetailServiceActivity : AppCompatActivity() {
                     binding.typeTextView.text = mService.type
                     binding.categoryTextView2.text = mService.category
                     binding.descriptionTextView.text = mService.description
+                    binding.authorTextView.text = mService.nameAuthor
                     imageUrl = mService.url.toString()
+
+                    userUid = mService.uidAuthor
 
                     if(fileUri == null){
                         Glide.with(applicationContext)
@@ -52,6 +57,10 @@ class DetailServiceActivity : AppCompatActivity() {
                 Log.w("TAG", "Failed to read value.", error.toException())
             }
         })
+
+        binding.authorTextView.setOnClickListener{
+            Toast.makeText(this, "Si paso: $userUid", Toast.LENGTH_SHORT).show()
+        }
 
     }
 }
