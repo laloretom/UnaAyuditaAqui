@@ -77,8 +77,8 @@ class DetailServiceActivity : AppCompatActivity() {
                     val mRequest = Request(toUid,toName,fromUid,fromName,serviceTitle,idService,message,"In process",idRequest)
                     val postValues =mRequest.toMap()
                     val childUpdates = hashMapOf<String, Any>(
-                        "/Users/$fromUid/Request/Sent/$idRequest" to postValues, //De
-                        "Users/$toUid/Request/Received/$idRequest" to postValues //Para
+                        "Users/$toUid/Request/Received/$idRequest" to postValues, //Para
+                        "Users/$fromUid/Request/Sent/$idRequest" to postValues //De
                     )
                     database.reference.updateChildren(childUpdates)
                     Toast.makeText(this, "Solicitud enviada", Toast.LENGTH_SHORT).show()
