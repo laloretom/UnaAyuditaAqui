@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -18,6 +19,8 @@ class DetailServiceActivity : AppCompatActivity() {
     private var imageUrl: String? = null
     private var fileUri: Uri? = null
     private var userUid: String? = null
+    private var mService: Service? = null
+    private val database = Firebase.database
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,17 +34,17 @@ class DetailServiceActivity : AppCompatActivity() {
 
         dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val mService: Service? = dataSnapshot.getValue(Service::class.java)
+                mService = dataSnapshot.getValue(Service::class.java)
                 if (mService != null) {
 
-                    binding.titleTextView.text = mService.serviceTitle
-                    binding.typeTextView.text = mService.type
-                    binding.categoryTextView2.text = mService.category
-                    binding.descriptionTextView.text = mService.description
-                    binding.authorTextView.text = mService.nameAuthor
-                    imageUrl = mService.url.toString()
+                    binding.titleTextView.text = mService!!.serviceTitle
+                    binding.typeTextView.text = mService!!.type
+                    binding.categoryTextView2.text = mService!!.category
+                    binding.descriptionTextView.text = mService!!.description
+                    binding.authorTextView.text = mService!!.nameAuthor
+                    imageUrl = mService!!.url.toString()
 
-                    userUid = mService.uidAuthor
+                    userUid = mService!!.uidAuthor
 
                     if(fileUri == null){
                         Glide.with(applicationContext)
@@ -58,8 +61,30 @@ class DetailServiceActivity : AppCompatActivity() {
             }
         })
 
-        binding.authorTextView.setOnClickListener{
-            Toast.makeText(this, "Si paso: $userUid", Toast.LENGTH_SHORT).show()
+        binding.applyButton.setOnClickListener{
+            //Toast.makeText(this, "Si paso: $userUid", Toast.LENGTH_SHORT).show()
+            RequestDialog(
+                onSubmitClickListener = { message ->
+                    val toUid: String? = mService!!.uidAuthor
+                    val toName: String? = mService!!.nameAuthor
+                    val fromUid: String? = Firebase.auth.currentUser!!.uid
+                    val fromName: String? = Firebase.auth.currentUser!!.displayName
+                    val serviceTitle: String? = mService!!.serviceTitle
+                    val idService: String? = mService!!.idService
+                    val myRef = database.getReference("Users/$toUid/Request/Received")
+                    val idRequest: String? = myRef.push().key.toString()
+
+                    val mRequest = Request(toUid,toName,fromUid,fromName,serviceTitle,idService,message,"In process",idRequest)
+                    val postValues =mRequest.toMap()
+                    val childUpdates = hashMapOf<String, Any>(
+                        "/Users/$fromUid/Request/Sent/$idRequest" to postValues, //De
+                        "Users/$toUid/Request/Received/$idRequest" to postValues //Para
+                    )
+                    database.reference.updateChildren(childUpdates)
+                    Toast.makeText(this, "Solicitud enviada", Toast.LENGTH_SHORT).show()
+                }
+            ).show(supportFragmentManager, "dialog")
+
         }
 
     }
