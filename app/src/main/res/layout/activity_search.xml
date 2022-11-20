@@ -25,6 +25,7 @@
         android:autofillHints="@string/search"
         android:background="@drawable/ic_field"
         android:ems="80"
+        android:imeOptions="actionDone"
         android:hint="@string/search"
         android:inputType="textAutoComplete"
         android:singleLine="true"

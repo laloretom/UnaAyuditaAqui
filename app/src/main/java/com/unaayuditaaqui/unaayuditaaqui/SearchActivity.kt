@@ -17,9 +17,10 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var dbRef: DatabaseReference
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val category = intent.getStringExtra("key")
 
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -27,8 +28,6 @@ class SearchActivity : AppCompatActivity() {
         serviceRecyclerView = findViewById(R.id.servicesList)
         serviceRecyclerView.layoutManager = LinearLayoutManager(this)
         serviceRecyclerView.setHasFixedSize(true)
-
-
 
         binding.backImageView.setOnClickListener {
             finish()
@@ -41,7 +40,12 @@ class SearchActivity : AppCompatActivity() {
             adapter.updateService(servicesFiltered as ArrayList<Service>)
         }
 
-        getServiceData()
+        if (category == null){
+            getServiceData()
+        } else {
+            getServiceDataXcategory(category)
+        }
+
     }
 
     private fun getServiceData(){
@@ -51,6 +55,28 @@ class SearchActivity : AppCompatActivity() {
                 if (snapshot.exists()){
                     for (serviceSnapshot in snapshot.children){
                         val service = serviceSnapshot.getValue(Service::class.java)
+                        serviceArrayList.add(service!!)
+                    }
+                    adapter = ServiceAdapter(serviceArrayList)
+                    serviceRecyclerView.adapter = adapter
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
+    private fun getServiceDataXcategory(categoryFilter: String) {
+        dbRef = FirebaseDatabase.getInstance().getReference("Services")
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (serviceSnapshot in snapshot.children){
+                        val service = serviceSnapshot.getValue(Service::class.java)
+                        if (service!!.category.toString() == categoryFilter)
                         serviceArrayList.add(service!!)
                     }
                     adapter = ServiceAdapter(serviceArrayList)
