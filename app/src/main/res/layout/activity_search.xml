@@ -4,27 +4,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray"
     tools:context=".SearchActivity">
 
-        <ImageView
+    <ImageView
         android:id="@+id/backImageView"
-        android:layout_width="39dp"
-        android:layout_height="33dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:contentDescription="@string/all"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/searchEditText"
+        app:layout_constraintBottom_toBottomOf="@id/searchEditText"
         app:srcCompat="@drawable/ic_back"
         tools:ignore="VectorDrawableCompat" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/search"
-        android:textStyle="bold"
-        android:textSize="40dp"
-        android:textColor="@color/colorPrimary"
-        android:gravity="center"/>
+    <EditText
+        android:id="@+id/searchEditText"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:autofillHints="@string/search"
+        android:background="@drawable/ic_field"
+        android:ems="80"
+        android:hint="@string/search"
+        android:inputType="textAutoComplete"
+        android:singleLine="true"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="8dp"
+        android:textSize="16sp"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintStart_toEndOf="@id/backImageView"
+        app:drawableStartCompat="@drawable/ic_search"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/servicesList"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/searchEditText"
+            tools:listitem="@layout/service_content" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

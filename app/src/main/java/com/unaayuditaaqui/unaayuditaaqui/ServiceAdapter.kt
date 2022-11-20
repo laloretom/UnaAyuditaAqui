@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class ServiceAdapter(private val serviceList: ArrayList<Service>) : RecyclerView.Adapter<ServiceAdapter.ViewHolder>(){
+class ServiceAdapter(private var serviceList: ArrayList<Service>) : RecyclerView.Adapter<ServiceAdapter.ViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -54,6 +54,9 @@ class ServiceAdapter(private val serviceList: ArrayList<Service>) : RecyclerView
         val image: ImageView = itemView.findViewById(R.id.imageServiceCardView)
     }
 
-
+    fun updateService(serviceList: ArrayList<Service>){
+        this.serviceList = serviceList
+        notifyDataSetChanged()
+    }
 
 }
