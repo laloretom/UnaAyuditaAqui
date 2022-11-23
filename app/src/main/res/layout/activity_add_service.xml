@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
-    tools:context=".AddServiceActivity">
-
+    tools:context=".EditServiceActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -146,8 +145,8 @@
                                 android:text="@string/category"
                                 android:textColor="@color/black_500" />
 
-                            <EditText
-                                android:id="@+id/categoryEditText"
+                            <AutoCompleteTextView
+                                android:id="@+id/categoryAutoCompleteTextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="58dp"
                                 android:layout_below="@+id/categoryTextView"
@@ -159,6 +158,7 @@
                                 android:background="@drawable/ic_field"
                                 android:ems="10"
                                 android:hint="@string/category"
+                                android:imeOptions="actionDone"
                                 android:inputType="textAutoComplete"
                                 android:paddingLeft="16dp"
                                 android:paddingTop="8dp"
@@ -170,7 +170,7 @@
                                 android:id="@+id/descriptionTextView"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/categoryEditText"
+                                android:layout_below="@+id/categoryAutoCompleteTextView"
                                 android:layout_alignParentStart="true"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginStart="16dp"

@@ -26,6 +26,8 @@ class EditServiceActivity : AppCompatActivity() {
     private val file = 1
     private var fileUri: Uri? = null
     private var imageUrl: String? = null
+    private lateinit var dbRef: DatabaseReference
+    private var serviceCategory: ArrayList<String> = arrayListOf<String>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,13 +47,15 @@ class EditServiceActivity : AppCompatActivity() {
             setAdapter(adapterTypeService)
         }
 
+        getServiceData()
+
         dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 val mService: Service? = dataSnapshot.getValue(Service::class.java)
                 if (mService != null) {
 
                     binding.titleEditText.text = Editable.Factory.getInstance().newEditable(mService.serviceTitle)
-                    binding.categoryEditText.text = Editable.Factory.getInstance().newEditable(mService.category)
+                    binding.categoryAutoCompleteTextView.text = Editable.Factory.getInstance().newEditable(mService.category)
                     binding.descriptionEditText.text = Editable.Factory.getInstance().newEditable(mService.description)
                     imageUrl = mService.url.toString()
 
@@ -70,14 +74,13 @@ class EditServiceActivity : AppCompatActivity() {
             }
         })
 
-
         binding.saveButton.setOnClickListener {
             val date = LocalDateTime.now()
                 .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
             val uidAuthor = Firebase.auth.currentUser!!.uid
             val nameAuthor = Firebase.auth.currentUser!!.displayName
             val serviceTitle : String = binding.titleEditText.text.toString()
-            val category : String = binding.categoryEditText.text.toString()
+            val category : String = binding.categoryAutoCompleteTextView.text.toString().lowercase()
             val description: String = binding.descriptionEditText.text.toString()
             val typeS : String = binding.autoCompleteTextView.text.toString()
             val idService: String? = key
@@ -129,4 +132,32 @@ class EditServiceActivity : AppCompatActivity() {
         fileUri = uri
         binding.posterImageView.setImageURI(uri)
     }
+
+    private fun getServiceData() {
+        dbRef = FirebaseDatabase.getInstance().getReference("Services")
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (serviceSnapshot in snapshot.children){
+                        val service = serviceSnapshot.getValue(Service::class.java)
+                        serviceCategory.add(service!!.category.toString())
+                    }
+
+                    val distinct: List<String> = LinkedHashSet(serviceCategory).toMutableList()
+                    val sorted_list = distinct.sortedWith(naturalOrder())
+
+                    val adapterCategoryService = ArrayAdapter(this@EditServiceActivity,R.layout.list_item_type,sorted_list)
+                    with(binding.categoryAutoCompleteTextView){
+                        setAdapter(adapterCategoryService)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
+
 }

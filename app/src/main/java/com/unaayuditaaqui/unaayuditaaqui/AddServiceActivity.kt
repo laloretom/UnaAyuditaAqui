@@ -9,6 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
@@ -23,7 +24,8 @@ class AddServiceActivity : AppCompatActivity() {
     private val myRef = database.getReference("Services")
     private val file = 1
     private var fileUri: Uri? = null
-
+    private lateinit var dbRef: DatabaseReference
+    private var serviceCategory: ArrayList<String> = arrayListOf<String>()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +40,7 @@ class AddServiceActivity : AppCompatActivity() {
             setAdapter(adapterTypeService)
         }
 
+        getServiceData()
 
         binding.saveButton.setOnClickListener{
             val dateTime = LocalDateTime.now()
@@ -46,7 +49,7 @@ class AddServiceActivity : AppCompatActivity() {
             val nameAuthor = Firebase.auth.currentUser!!.displayName
             val serviceTitle : String = binding.titleEditText.text.toString()
             val date : String = dateTime.toString()
-            val category : String = binding.categoryEditText.text.toString()
+            val category : String = binding.categoryAutoCompleteTextView.text.toString().lowercase()
             val description: String = binding.descriptionEditText.text.toString()
             val key: String = myRef.push().key.toString()
             val idService: String = key
@@ -103,5 +106,31 @@ class AddServiceActivity : AppCompatActivity() {
         binding.posterImageView.setImageURI(uri)
     }
 
+    private fun getServiceData() {
+        dbRef = FirebaseDatabase.getInstance().getReference("Services")
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (serviceSnapshot in snapshot.children){
+                        val service = serviceSnapshot.getValue(Service::class.java)
+                        serviceCategory.add(service!!.category.toString())
+                    }
+
+                    val distinct: List<String> = LinkedHashSet(serviceCategory).toMutableList()
+                    val sorted_list = distinct.sortedWith(naturalOrder())
+
+                    val adapterCategoryService = ArrayAdapter(this@AddServiceActivity,R.layout.list_item_type,sorted_list)
+                    with(binding.categoryAutoCompleteTextView){
+                        setAdapter(adapterCategoryService)
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+    }
 
 }
