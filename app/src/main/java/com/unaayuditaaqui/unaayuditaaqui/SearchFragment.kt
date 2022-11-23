@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.firebase.database.*
@@ -17,6 +16,7 @@ class SearchFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var dbRef: DatabaseReference
     private var serviceCategory: ArrayList<String> = arrayListOf<String>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,13 +34,6 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val typeService = resources.getStringArray(R.array.type_service)
-        val adapterTypeService = ArrayAdapter(view.context,R.layout.list_item_type,typeService)
-
-        with(binding.autoCompleteTextView){
-            setAdapter(adapterTypeService)
-        }
-
         binding.searchRootView.setOnClickListener {
             val intent = Intent(activity, SearchActivity::class.java)
             this.startActivity(intent)
@@ -54,7 +47,7 @@ class SearchFragment : Fragment() {
         _binding = null
     }
 
-    private fun getServiceData(){
+    private fun getServiceData() {
         dbRef = FirebaseDatabase.getInstance().getReference("Services")
         dbRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

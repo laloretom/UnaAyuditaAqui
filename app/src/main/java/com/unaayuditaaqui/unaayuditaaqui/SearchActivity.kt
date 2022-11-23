@@ -1,6 +1,8 @@
 package com.unaayuditaaqui.unaayuditaaqui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +23,7 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val category = intent.getStringExtra("key")
+        val mType = intent.getStringExtra("mType")
 
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -29,8 +32,11 @@ class SearchActivity : AppCompatActivity() {
         serviceRecyclerView.layoutManager = LinearLayoutManager(this)
         serviceRecyclerView.setHasFixedSize(true)
 
-        binding.backImageView.setOnClickListener {
-            finish()
+        val typeService = resources.getStringArray(R.array.type_service)
+        val adapterTypeService = ArrayAdapter(this,R.layout.list_item_type,typeService)
+
+        with(binding.autoCompleteTextView){
+            setAdapter(adapterTypeService)
         }
 
         binding.searchEditText.addTextChangedListener { titleFilter ->
@@ -38,6 +44,16 @@ class SearchActivity : AppCompatActivity() {
                serviceArrayList.filter { service ->
                    service.serviceTitle!!.lowercase().contains(titleFilter.toString().lowercase())}
             adapter.updateService(servicesFiltered as ArrayList<Service>)
+        }
+
+
+        binding.autoCompleteTextView.setOnDismissListener {
+            val mType : String = binding.autoCompleteTextView.text.toString()
+            val servicesFiltered =
+                serviceArrayList.filter { service ->
+                    service.type!!.contains(mType)}
+            adapter.updateService(servicesFiltered as ArrayList<Service>)
+
         }
 
         if (category == null){
@@ -72,6 +88,8 @@ class SearchActivity : AppCompatActivity() {
     private fun getServiceDataXcategory(categoryFilter: String) {
         dbRef = FirebaseDatabase.getInstance().getReference("Services")
         dbRef.addValueEventListener(object : ValueEventListener {
+
+            @SuppressLint("SuspiciousIndentation")
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     for (serviceSnapshot in snapshot.children){

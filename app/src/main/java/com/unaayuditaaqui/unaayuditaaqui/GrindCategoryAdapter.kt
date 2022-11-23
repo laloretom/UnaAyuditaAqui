@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class GrindCategoryAdapter (private var categryList: List<String>) : RecyclerView.Adapter<GrindCategoryAdapter.ViewHolder>(){
+class GrindCategoryAdapter(private var categryList: List<String>) : RecyclerView.Adapter<GrindCategoryAdapter.ViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
