@@ -6,31 +6,31 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/gray"
-    tools:context=".HomeFragment">
+    tools:context=".RequestReceivedFragment">
 
     <TextView
-        android:id="@+id/lastPublishedTextView"
+        android:id="@+id/titleTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/recycler_view_item_bg"
         android:fontFamily="sans-serif-medium"
         android:gravity="center_horizontal"
-        android:text="Ultimos servicios publicados"
+        android:text="Deslice la solicitud\nIzquierda para Rechazar o Derecha para Aceptar "
         android:textColor="@color/colorPrimary"
-        android:textSize="18sp"
+        android:textSize="14sp"
+        android:layout_marginTop="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/servicesList"
+        android:id="@+id/requestRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lastPublishedTextView"
-        tools:listitem="@layout/service_content" />
+        app:layout_constraintTop_toBottomOf="@id/titleTextView"
+        tools:listitem="@layout/request_content" />
 
 </LinearLayout>

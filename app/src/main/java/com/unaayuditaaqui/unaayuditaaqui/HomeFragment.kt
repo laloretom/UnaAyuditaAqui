@@ -11,14 +11,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.unaayuditaaqui.unaayuditaaqui.databinding.FragmentHomeBinding
 
+
 class HomeFragment : Fragment() {
-    /*  Asignar la variable _binding inicialmente a nulo y
-    /   También cuando la vista se destruye nuevamente, debe establecerse en nulo
-    */
+
     private var _binding: FragmentHomeBinding? = null
-    /*  Con la propiedad de respaldo del kotlin que extraemos
-    /   el valor no nulo de _binding
-    */
     private val binding get() = _binding!!
     private lateinit var serviceRecyclerView: RecyclerView
     private lateinit var serviceArrayList: ArrayList<Service>
@@ -26,6 +22,7 @@ class HomeFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
     private lateinit var dbRef: DatabaseReference
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,19 +49,22 @@ class HomeFragment : Fragment() {
 
         serviceArrayList = arrayListOf<Service>()
         getServiceData()
+        //serviceArrayList.clear()
 
     }
 
     private fun getServiceData(){
         dbRef = FirebaseDatabase.getInstance().getReference("Services")
-        dbRef.addValueEventListener(object : ValueEventListener {
+        val db: Query = dbRef.orderByChild("dateInverted")
+        db.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()){
                     for (serviceSnapshot in snapshot.children){
                         val service = serviceSnapshot.getValue(Service::class.java)
                         serviceArrayList.add(service!!)
                     }
-                    serviceRecyclerView.adapter = ServiceAdapter(serviceArrayList)
+                    val reversedView: MutableList<Service> = ArrayList(serviceArrayList.asReversed())
+                    serviceRecyclerView.adapter = ServiceAdapter(reversedView)
                 }
             }
 

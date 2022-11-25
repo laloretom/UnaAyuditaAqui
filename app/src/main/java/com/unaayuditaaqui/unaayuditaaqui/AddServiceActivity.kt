@@ -18,6 +18,7 @@ import com.unaayuditaaqui.unaayuditaaqui.databinding.ActivityAddServiceBinding
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+
 class AddServiceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddServiceBinding
     private val database = Firebase.database
@@ -44,7 +45,9 @@ class AddServiceActivity : AppCompatActivity() {
 
         binding.saveButton.setOnClickListener{
             val dateTime = LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+            val dateInverted = LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("-yyyyMMddHHmmss"))
             val uidAuthor = Firebase.auth.currentUser!!.uid
             val nameAuthor = Firebase.auth.currentUser!!.displayName
             val serviceTitle : String = binding.titleEditText.text.toString()
@@ -59,19 +62,11 @@ class AddServiceActivity : AppCompatActivity() {
 
             if (typeS != ""){
                 if(fileUri==null){
-                    val mService = Service(uidAuthor, nameAuthor,serviceTitle,typeS, description, category,date," ",idService)
-                    val postValues =mService.toMap()
-
-                    val childUpdates = hashMapOf<String, Any>(
-                        "/Services/$key" to postValues,
-                        "/Users/$uidAuthor/Services/$key" to postValues
-                    )
-                    database.reference.updateChildren(childUpdates)
-                    //myRef.child(key).setValue(mService)
+                    Toast.makeText(this, "No se detectó una imagen", Toast.LENGTH_SHORT).show()
                 } else {
                     servicesReference.putFile(fileUri!!).addOnSuccessListener {
                         servicesReference.downloadUrl.addOnSuccessListener { uri ->
-                            val mService = Service(uidAuthor, nameAuthor, serviceTitle,typeS, description, category,date, uri.toString(), idService)
+                            val mService = Service(uidAuthor, nameAuthor, serviceTitle,typeS, description, category,date,dateInverted, uri.toString(), idService)
                             val postValues =mService.toMap()
 
                             val childUpdates = hashMapOf<String, Any>(
@@ -79,12 +74,10 @@ class AddServiceActivity : AppCompatActivity() {
                                 "/Users/$uidAuthor/Services/$key" to postValues
                             )
                             database.reference.updateChildren(childUpdates)
-                            //myRef.child(key).setValue(mService)
                         }
                     }
+                    finish()
                 }
-
-                finish()
 
             }else{
                 Toast.makeText(this, "Selecione el tipo", Toast.LENGTH_SHORT).show()

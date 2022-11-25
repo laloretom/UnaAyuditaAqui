@@ -76,7 +76,9 @@ class EditServiceActivity : AppCompatActivity() {
 
         binding.saveButton.setOnClickListener {
             val date = LocalDateTime.now()
-                .format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+            val dateInverted = LocalDateTime.now()
+                .format(DateTimeFormatter.ofPattern("-yyyyMMddHHmmss"))
             val uidAuthor = Firebase.auth.currentUser!!.uid
             val nameAuthor = Firebase.auth.currentUser!!.displayName
             val serviceTitle : String = binding.titleEditText.text.toString()
@@ -90,28 +92,27 @@ class EditServiceActivity : AppCompatActivity() {
                 val serviceReference : StorageReference = folder.child("img$key")
 
                 if(fileUri == null){
-                    val mService = Service(uidAuthor, nameAuthor, serviceTitle, typeS, description, category, date, imageUrl, idService)
+                    val mService = Service(uidAuthor, nameAuthor, serviceTitle, typeS, description, category, date,dateInverted, imageUrl, idService)
                     val postValues =mService.toMap()
                     val childUpdates = hashMapOf<String, Any>(
                         "/Services/$key" to postValues,
                         "/Users/$uidAuthor/Services/$key" to postValues
                     )
                     database.reference.updateChildren(childUpdates)
-                    //dbRef.setValue(mService)
                 } else {
                     serviceReference.putFile(fileUri!!).addOnSuccessListener {
                         serviceReference.downloadUrl.addOnSuccessListener { uri ->
-                            val mService = Service(uidAuthor, nameAuthor, serviceTitle, typeS, description, category, date, uri.toString(), idService)
+                            val mService = Service(uidAuthor, nameAuthor, serviceTitle, typeS, description, category, date,dateInverted, uri.toString(), idService)
                             val postValues =mService.toMap()
                             val childUpdates = hashMapOf<String, Any>(
                                 "/Services/$key" to postValues,
                                 "/Users/$uidAuthor/Services/$key" to postValues
                             )
                             database.reference.updateChildren(childUpdates)
-                            //dbRef.setValue(mService)
                         }
                     }
                 }
+                Toast.makeText(this, "Actualización completada", Toast.LENGTH_SHORT).show()
                 finish()
             }else{
                 Toast.makeText(this, "Selecione el tipo", Toast.LENGTH_SHORT).show()

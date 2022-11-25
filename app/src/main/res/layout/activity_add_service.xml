@@ -94,6 +94,7 @@
                                 android:background="@drawable/ic_field"
                                 android:ems="80"
                                 android:hint="@string/title"
+                                android:imeOptions="actionDone"
                                 android:inputType="textAutoComplete"
                                 android:paddingLeft="16dp"
                                 android:paddingTop="8dp"

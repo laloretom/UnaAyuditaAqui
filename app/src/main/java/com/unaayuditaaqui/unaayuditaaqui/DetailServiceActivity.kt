@@ -1,9 +1,11 @@
 package com.unaayuditaaqui.unaayuditaaqui
 
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
@@ -13,6 +15,8 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.unaayuditaaqui.unaayuditaaqui.databinding.ActivityDetailServiceBinding
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class DetailServiceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailServiceBinding
@@ -22,6 +26,7 @@ class DetailServiceActivity : AppCompatActivity() {
     private var mService: Service? = null
     private val database = Firebase.database
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailServiceBinding.inflate(layoutInflater)
@@ -65,6 +70,10 @@ class DetailServiceActivity : AppCompatActivity() {
             //Toast.makeText(this, "Si paso: $userUid", Toast.LENGTH_SHORT).show()
             RequestDialog(
                 onSubmitClickListener = { message ->
+                    val date = LocalDateTime.now()
+                        .format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                    val dateInverted = LocalDateTime.now()
+                        .format(DateTimeFormatter.ofPattern("-yyyyMMddHHmmss"))
                     val toUid: String? = mService!!.uidAuthor
                     val toName: String? = mService!!.nameAuthor
                     val fromUid: String? = Firebase.auth.currentUser!!.uid
@@ -74,7 +83,7 @@ class DetailServiceActivity : AppCompatActivity() {
                     val myRef = database.getReference("Users/$toUid/Request/Received")
                     val idRequest: String? = myRef.push().key.toString()
 
-                    val mRequest = Request(toUid,toName,fromUid,fromName,serviceTitle,idService,message,"In process",idRequest)
+                    val mRequest = Request(toUid,toName,fromUid,fromName,serviceTitle,idService,message,"Pendiente",idRequest,date,dateInverted)
                     val postValues =mRequest.toMap()
                     val childUpdates = hashMapOf<String, Any>(
                         "Users/$toUid/Request/Received/$idRequest" to postValues, //Para

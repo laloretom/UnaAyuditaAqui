@@ -14,6 +14,8 @@ data class Request (
     var message: String? = null,
     var state: String? = null,
     val idRequest: String? = null,
+    val date:   String? = null,
+    val dateInverted: String? = null,
     @Exclude val key: String? = null
 ) {
     
@@ -28,5 +30,7 @@ data class Request (
             "idService" to idService,
             "message" to message,
             "state" to state,
-            "idRequest" to idRequest
+            "idRequest" to idRequest,
+            "date" to date,
+            "dateInverted" to dateInverted
         )}}

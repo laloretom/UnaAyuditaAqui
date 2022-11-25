@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/recycler_view_item_bg">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/title"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center|start"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/messageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/titleTextView"
+                android:layout_marginTop="1dp"
+                android:layout_marginStart="16dp"
+                android:text="Mensaje:"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center|start"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/messageTextView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleTextView"
+                android:layout_toEndOf="@+id/messageTextView"
+                android:layout_marginTop="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center|start"
+                android:text="asdasdaasd asdasdasdasd asdasd asdas das daa sd as dasd asd asd asd asd asd asdas"
+                android:textSize="14sp" />
+
+
+            <TextView
+                android:id="@+id/stateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/messageTextView2"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center|start"
+                android:text="Estado:"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/stateTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/messageTextView2"
+                android:layout_toEndOf="@+id/messageTextView"
+                android:layout_alignBottom="@id/stateTextView"
+                android:layout_marginTop="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center|start"
+                android:text="estado"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/fromTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/stateTextView"
+                android:layout_marginTop="1dp"
+                android:layout_marginStart="16dp"
+                android:text="De:"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center|start"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/fromTextView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/stateTextView"
+                android:layout_toEndOf="@+id/fromTextView"
+                android:layout_alignBottom="@id/fromTextView"
+                android:layout_marginTop="1dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center|start"
+                android:text="@string/name"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="16dp"
+                android:layout_below="@id/stateTextView"
+                android:text="@string/date"
+                android:textSize="16dp"/>
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
+

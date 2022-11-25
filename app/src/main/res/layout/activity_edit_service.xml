@@ -92,6 +92,7 @@
                                 android:layout_marginRight="16dp"
                                 android:autofillHints="@string/title"
                                 android:background="@drawable/ic_field"
+                                android:imeOptions="actionDone"
                                 android:ems="80"
                                 android:hint="@string/title"
                                 android:inputType="textAutoComplete"
@@ -127,6 +128,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:inputType="none"
+                                    android:imeOptions="actionDone"
                                     android:hint="Tipo"/>
 
                             </com.google.android.material.textfield.TextInputLayout>

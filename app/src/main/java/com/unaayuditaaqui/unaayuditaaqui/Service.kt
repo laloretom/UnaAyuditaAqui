@@ -12,6 +12,7 @@ data class Service (
     var description: String? = null,
     var category: String? = null,
     val date:   String? = null,
+    val dateInverted: String? = null,
     var url: String? = null,
     var idService: String? = null,
     @Exclude val key: String? = null
@@ -27,6 +28,7 @@ data class Service (
             "description" to description,
             "category" to category,
             "date" to date,
+            "dateInverted" to dateInverted,
             "url" to url,
             "idService" to idService
         )}}

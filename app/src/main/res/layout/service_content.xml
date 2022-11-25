@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:layout_marginTop="24dp"
+    android:layout_height="120dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
     app:cardCornerRadius="15dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="5dp"
         android:background="@drawable/recycler_view_item_bg">
 
         <RelativeLayout
@@ -19,68 +20,60 @@
             android:layout_height="match_parent"
             android:padding="16dp">
 
-            <RelativeLayout
-                android:id="@+id/header_image_root"
+            <ImageView
+                android:id="@+id/imageServiceCardView"
                 android:layout_width="150dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
-                android:layout_centerVertical="true">
-
-                <ImageView
-                    android:id="@+id/imageServiceCardView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="2dp"
-                    android:layout_marginBottom="2dp"
-                    android:contentDescription="@null"
-                    android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/ic_profile" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/categoryTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:text="@string/category"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp"
-                android:fontFamily="sans-serif-medium"
-                android:layout_alignParentEnd="true"/>
+                android:layout_height="0dp"
+                android:contentDescription="@null"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentBottom="true"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_profile" />
 
             <TextView
                 android:id="@+id/titleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="true"
-                android:gravity="center|start"
-                android:layout_toEndOf="@id/header_image_root"
-                android:fontFamily="sans-serif-light"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/imageServiceCardView"
+                android:layout_toEndOf="@+id/imageServiceCardView"
+                android:layout_marginStart="16dp"
                 android:text="@string/title"
+                android:fontFamily="sans-serif-light"
+                android:gravity="center|start"
                 android:textColor="@color/colorPrimary"
-                android:textSize="16sp"
-                android:padding="16dp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/categoryTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@+id/titleTextView"
+                android:layout_toEndOf="@+id/imageServiceCardView"
+                android:layout_marginTop="1dp"
+                android:layout_marginStart="16dp"
+                android:text="@string/category"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center|start"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/dateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_alignBottom="@+id/imageServiceCardView"
+                android:layout_toEndOf="@+id/imageServiceCardView"
+                android:layout_marginStart="16dp"
                 android:text="@string/date"
-                android:textColor="@color/black_200"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"/>
+                android:textColor="@color/black_200" />
+
         </RelativeLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
-
